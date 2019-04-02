@@ -1,0 +1,64 @@
+swagger: "2.0"
+info:
+  description: "This is an OpenAPI specification (swagger contract) for a boiler plate code for basic loopback application. I am using post API to convert roman number to decimal value."
+  version: "1.0.0"
+  title: "lb-expresso-boilerplate"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "kuppal@sapient.com.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:3000"
+basePath: "/"
+schemes:
+- "http"
+paths:
+  /romanToDecimal:
+    post:
+      tags:
+      - "Roman to decimal"
+      summary: "Convert roman number to decimal"
+      description: "Accepts valid Roman number alphabet in body and returns the roman as well as decimal value."
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Object containing valid roman value."
+        required: true
+        schema:
+          $ref: "#/definitions/RomanNum"
+      responses:
+        200:
+          description: "Returns object with roman alphabet and corresponding decimal value"
+          schema:
+            $ref: "#/definitions/DecimalOutput"
+        405:
+          description: "Invalid input"
+    
+definitions:
+  RomanNum:
+    type: "object"
+    required:
+    - "roman"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      roman:
+        type: "string"
+        example: "XVI"
+  DecimalOutput:
+    type: "object"
+    properties:
+      roman:
+        type: "string"
+        example: "XVI"
+      decimal:
+        type: "string"
+        example: "16"
+      
+  
