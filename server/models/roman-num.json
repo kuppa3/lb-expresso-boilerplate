@@ -1,0 +1,23 @@
+{
+  "name": "RomanNum",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "id": {
+      "type": "number",
+      "format": "int64"
+    },
+    "roman": {
+      "type": "string",
+      "required": true,
+      "example": "XVI"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

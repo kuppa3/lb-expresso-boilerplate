@@ -12,5 +12,17 @@
       "../common/mixins",
       "./mixins"
     ]
+  },
+  "swagger_": {
+    "dataSource": null,
+    "public": true
+  },
+  "RomanNum": {
+    "dataSource": null,
+    "public": true
+  },
+  "DecimalOutput": {
+    "dataSource": null,
+    "public": true
   }
 }

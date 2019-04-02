@@ -1,0 +1,22 @@
+{
+  "name": "DecimalOutput",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "roman": {
+      "type": "string",
+      "example": "XVI"
+    },
+    "decimal": {
+      "type": "string",
+      "example": "16"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

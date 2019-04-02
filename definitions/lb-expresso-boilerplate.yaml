@@ -1,0 +1,818 @@
+swagger: '2.0'
+
+info:
+  x-ibm-name: lb-expresso-boilerplate
+  version: 1.0.0
+  title: lb-expresso-boilerplate
+
+schemes:
+  - https
+host: $(catalog.host)
+basePath: /api
+
+consumes:
+  - application/json
+produces:
+  - application/json
+
+securityDefinitions:
+ clientIdHeader:
+   type: apiKey
+   in: header
+   name: X-IBM-Client-Id
+ clientSecretHeader:
+   in: "header"
+   name: "X-IBM-Client-Secret"
+   type: "apiKey"
+
+
+security:
+ -
+   clientIdHeader: []
+   clientSecretHeader: []
+
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  catalogs:
+    apic-dev:
+      properties:
+        runtime-url: $(TARGET_URL)
+    sb:
+      properties:
+        runtime-url: 'http://localhost:4001'
+  assembly:
+    execute:
+      - invoke:
+          target-url: $(runtime-url)$(request.path)$(request.search)
+
+paths:
+  /swagger_s/romanToDecimal:
+    post:
+      tags:
+        - swagger_
+      summary: Accepts valid Roman number alphabet in body and returns the roman as well as decimal value.
+      operationId: swagger_.postRomanToDecimal
+      parameters:
+        - name: body
+          in: body
+          description: Object containing valid roman value.
+          required: true
+          schema:
+            description: Object containing valid roman value.
+            $ref: '#/definitions/RomanNum'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            description: Returns object with roman alphabet and corresponding decimal value
+            $ref: '#/definitions/DecimalOutput'
+      deprecated: false
+  /RomanNums:
+    post:
+      tags:
+        - RomanNum
+      summary: Create a new instance of the model and persist it into the data source.
+      operationId: RomanNum.create
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/RomanNum'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/RomanNum'
+      deprecated: false
+    patch:
+      tags:
+        - RomanNum
+      summary: Patch an existing model instance or insert a new one into the data source.
+      operationId: RomanNum.patchOrCreate
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/RomanNum'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/RomanNum'
+      deprecated: false
+    put:
+      tags:
+        - RomanNum
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: RomanNum.replaceOrCreate__put_RomanNums
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/RomanNum'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/RomanNum'
+      deprecated: false
+    get:
+      tags:
+        - RomanNum
+      summary: Find all instances of the model matched by filter from the data source.
+      operationId: RomanNum.find
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string (`{"where":{"something":"value"}}`).  See https://loopback.io/doc/en/lb3/Querying-data.html#using-stringified-json-in-rest-queries for more details.'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/RomanNum'
+      deprecated: false
+  /RomanNums/replaceOrCreate:
+    post:
+      tags:
+        - RomanNum
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: RomanNum.replaceOrCreate__post_RomanNums_replaceOrCreate
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/RomanNum'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/RomanNum'
+      deprecated: false
+  /RomanNums/upsertWithWhere:
+    post:
+      tags:
+        - RomanNum
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
+      operationId: RomanNum.upsertWithWhere
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/RomanNum'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/RomanNum'
+      deprecated: false
+  '/RomanNums/{id}/exists':
+    get:
+      tags:
+        - RomanNum
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'RomanNum.exists__get_RomanNums_{id}_exists'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+  '/RomanNums/{id}':
+    head:
+      tags:
+        - RomanNum
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'RomanNum.exists__head_RomanNums_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+    get:
+      tags:
+        - RomanNum
+      summary: 'Find a model instance by {{id}} from the data source.'
+      operationId: RomanNum.findById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: filter
+          in: query
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/RomanNum'
+      deprecated: false
+    put:
+      tags:
+        - RomanNum
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'RomanNum.replaceById__put_RomanNums_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/RomanNum'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/RomanNum'
+      deprecated: false
+    delete:
+      tags:
+        - RomanNum
+      summary: 'Delete a model instance by {{id}} from the data source.'
+      operationId: RomanNum.deleteById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    patch:
+      tags:
+        - RomanNum
+      summary: Patch attributes for a model instance and persist it into the data source.
+      operationId: RomanNum.prototype.patchAttributes
+      parameters:
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/RomanNum'
+        - name: id
+          in: path
+          description: RomanNum id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/RomanNum'
+      deprecated: false
+  '/RomanNums/{id}/replace':
+    post:
+      tags:
+        - RomanNum
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'RomanNum.replaceById__post_RomanNums_{id}_replace'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/RomanNum'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/RomanNum'
+      deprecated: false
+  /RomanNums/findOne:
+    get:
+      tags:
+        - RomanNum
+      summary: Find first instance of the model matched by filter from the data source.
+      operationId: RomanNum.findOne
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string (`{"where":{"something":"value"}}`).  See https://loopback.io/doc/en/lb3/Querying-data.html#using-stringified-json-in-rest-queries for more details.'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/RomanNum'
+      deprecated: false
+  /RomanNums/update:
+    post:
+      tags:
+        - RomanNum
+      summary: 'Update instances of the model matched by {{where}} from the data source.'
+      operationId: RomanNum.updateAll
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/RomanNum'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            description: Information related to the outcome of the operation
+            type: object
+            properties:
+              count:
+                description: The number of instances updated
+                type: number
+                format: double
+      deprecated: false
+  /RomanNums/count:
+    get:
+      tags:
+        - RomanNum
+      summary: Count instances of the model matched by where from the data source.
+      operationId: RomanNum.count
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              count:
+                type: number
+                format: double
+      deprecated: false
+  /DecimalOutputs:
+    post:
+      tags:
+        - DecimalOutput
+      summary: Create a new instance of the model and persist it into the data source.
+      operationId: DecimalOutput.create
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/DecimalOutput'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/DecimalOutput'
+      deprecated: false
+    patch:
+      tags:
+        - DecimalOutput
+      summary: Patch an existing model instance or insert a new one into the data source.
+      operationId: DecimalOutput.patchOrCreate
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/DecimalOutput'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/DecimalOutput'
+      deprecated: false
+    put:
+      tags:
+        - DecimalOutput
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: DecimalOutput.replaceOrCreate__put_DecimalOutputs
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/DecimalOutput'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/DecimalOutput'
+      deprecated: false
+    get:
+      tags:
+        - DecimalOutput
+      summary: Find all instances of the model matched by filter from the data source.
+      operationId: DecimalOutput.find
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string (`{"where":{"something":"value"}}`).  See https://loopback.io/doc/en/lb3/Querying-data.html#using-stringified-json-in-rest-queries for more details.'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/DecimalOutput'
+      deprecated: false
+  /DecimalOutputs/replaceOrCreate:
+    post:
+      tags:
+        - DecimalOutput
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: DecimalOutput.replaceOrCreate__post_DecimalOutputs_replaceOrCreate
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/DecimalOutput'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/DecimalOutput'
+      deprecated: false
+  /DecimalOutputs/upsertWithWhere:
+    post:
+      tags:
+        - DecimalOutput
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
+      operationId: DecimalOutput.upsertWithWhere
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/DecimalOutput'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/DecimalOutput'
+      deprecated: false
+  '/DecimalOutputs/{id}/exists':
+    get:
+      tags:
+        - DecimalOutput
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'DecimalOutput.exists__get_DecimalOutputs_{id}_exists'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+  '/DecimalOutputs/{id}':
+    head:
+      tags:
+        - DecimalOutput
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'DecimalOutput.exists__head_DecimalOutputs_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+    get:
+      tags:
+        - DecimalOutput
+      summary: 'Find a model instance by {{id}} from the data source.'
+      operationId: DecimalOutput.findById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: filter
+          in: query
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/DecimalOutput'
+      deprecated: false
+    put:
+      tags:
+        - DecimalOutput
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'DecimalOutput.replaceById__put_DecimalOutputs_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/DecimalOutput'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/DecimalOutput'
+      deprecated: false
+    delete:
+      tags:
+        - DecimalOutput
+      summary: 'Delete a model instance by {{id}} from the data source.'
+      operationId: DecimalOutput.deleteById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    patch:
+      tags:
+        - DecimalOutput
+      summary: Patch attributes for a model instance and persist it into the data source.
+      operationId: DecimalOutput.prototype.patchAttributes
+      parameters:
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/DecimalOutput'
+        - name: id
+          in: path
+          description: DecimalOutput id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/DecimalOutput'
+      deprecated: false
+  '/DecimalOutputs/{id}/replace':
+    post:
+      tags:
+        - DecimalOutput
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'DecimalOutput.replaceById__post_DecimalOutputs_{id}_replace'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/DecimalOutput'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/DecimalOutput'
+      deprecated: false
+  /DecimalOutputs/findOne:
+    get:
+      tags:
+        - DecimalOutput
+      summary: Find first instance of the model matched by filter from the data source.
+      operationId: DecimalOutput.findOne
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string (`{"where":{"something":"value"}}`).  See https://loopback.io/doc/en/lb3/Querying-data.html#using-stringified-json-in-rest-queries for more details.'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/DecimalOutput'
+      deprecated: false
+  /DecimalOutputs/update:
+    post:
+      tags:
+        - DecimalOutput
+      summary: 'Update instances of the model matched by {{where}} from the data source.'
+      operationId: DecimalOutput.updateAll
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/DecimalOutput'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            description: Information related to the outcome of the operation
+            type: object
+            properties:
+              count:
+                description: The number of instances updated
+                type: number
+                format: double
+      deprecated: false
+  /DecimalOutputs/count:
+    get:
+      tags:
+        - DecimalOutput
+      summary: Count instances of the model matched by where from the data source.
+      operationId: DecimalOutput.count
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              count:
+                type: number
+                format: double
+      deprecated: false
+
+
+definitions:
+  RomanNum:
+    properties:
+      id:
+        type: number
+        format: double
+      roman:
+        type: string
+    required:
+      - roman
+    additionalProperties: false
+  DecimalOutput:
+    properties:
+      roman:
+        type: string
+      decimal:
+        type: string
+      id:
+        type: number
+        format: double
+    additionalProperties: false
+  x-any:
+    properties: {}
+
