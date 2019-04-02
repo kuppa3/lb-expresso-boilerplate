@@ -19,10 +19,10 @@
   },
   "RomanNum": {
     "dataSource": null,
-    "public": true
+    "public": false
   },
   "DecimalOutput": {
     "dataSource": null,
-    "public": true
+    "public": false
   }
 }

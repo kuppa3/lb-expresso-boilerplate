@@ -12,8 +12,12 @@ SwaggerApi.postRomanToDecimal = function(body, callback) {
   // Replace the code below with your implementation.
   // Please make sure the callback is invoked.
   process.nextTick(function() {
-    var err = new Error('Not implemented');
-    callback(err);
+    //var err = new Error('Not implemented');
+    //callback(err);
+    callback({
+      roman:'X',
+      decimal:'10'
+    });
   });
   
   /*
